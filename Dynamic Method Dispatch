@@ -1,0 +1,30 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ *
+ * @author Ayush Gupta
+ Also Known as Run Time Polymorphism
+ */
+public class Telusko {
+    public static void main(String[] args) {
+         A obj1 = new A();
+         B obj2 = new B();
+         A a = obj2;       // Reference is assigned object 2 so 
+         a.show();
+         
+    }  
+}
+class A { // Late Binding ----Dynamic binding And Run-time Polymorphism
+    public void show() {
+        System.out.println("In A");
+    }
+} 
+class B extends A {           //method overriding
+   public void show() {
+        System.out.println("In B");
+    }
+}
