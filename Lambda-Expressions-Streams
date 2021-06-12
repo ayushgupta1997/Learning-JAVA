@@ -1,0 +1,83 @@
+package com.ayush;
+
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+// Each operation should be non interfering and independent
+public class Main {
+
+    public static void main(String[] args) {
+        List<String> bingoNumbers = Arrays.asList("a20", "g30", "b20", "h90", "g78", "g99", "h99", "g54");
+        bingoNumbers.stream().map(String::toUpperCase).filter(s -> s.startsWith("G")).sorted().forEach(System.out::println);
+        System.out.println("********");
+        List<String> sortedGNumbers = bingoNumbers.stream().map(String::toUpperCase).filter(s -> s.startsWith("G")).sorted().collect(Collectors.toList());
+
+        sortedGNumbers.forEach(s -> System.out.println(s));
+
+        Employee ayush = new Employee("ayush gupta", 23);
+        Employee john = new Employee("john doe", 34);
+        Employee jack = new Employee("jack hill", 22);
+        Employee snow = new Employee("snow white", 45);
+
+        Department hr = new Department("Human Resources");
+        Department accounting = new Department( "Accounting");
+        hr.addEmployee(jack);
+        hr.addEmployee(john);
+        hr.addEmployee(snow);
+        accounting.addEmployee(ayush);
+
+        List<Department> departments = new ArrayList<>();
+        departments.add(hr);
+        departments.add(accounting);
+        departments.stream().flatMap(department -> department.getEmployeeList().stream()).forEach(System.out::println);
+    }
+}
+
+class Employee {
+    private String name;
+    private int age;
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public Employee(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+}
+
+class Department {
+    private String name;
+    private List<Employee> employeeList;
+
+    public Department(String name) {
+        this.name = name;
+        this.employeeList = new ArrayList<>();
+    }
+    public void addEmployee(Employee employee) {
+        employeeList.add(employee);
+    }
+    public List<Employee> getEmployeeList() {
+        return employeeList;
+    }
+}
